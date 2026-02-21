@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EasyAlgo - Duolingo for Data Structures & Algorithms
 
-## Getting Started
+EasyAlgo is a gamified DSA learning app built with Next.js.  
+It teaches logic-first understanding through interaction, not full code typing.
 
-First, run the development server:
+## Product Experience
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Drag-and-drop algorithm builder (`react-dnd`)
+- Fill-in-the-blank code mode with Python/C++/Java toggle
+- Flip flashcards with known/unknown tracking
+- Visual explanation panel with beginner-friendly reasoning
+- Learning path: Arrays -> Two Pointers -> Stack -> Binary Search
+- Gamification: XP, streak, level, and progress bar
+
+## Tech Stack
+
+- Next.js (App Router)
+- React + TypeScript
+- Tailwind CSS
+- React DnD (`react-dnd`, `react-dnd-html5-backend`)
+
+## Project Structure
+
+```text
+src/
+  app/
+    globals.css
+    layout.tsx
+    page.tsx
+  components/
+    app/
+      easyalgo-app.tsx
+    dashboard/
+      gamification-bar.tsx
+    learning/
+      algorithm-builder.tsx
+      dsa-flashcards.tsx
+      fill-blank-code.tsx
+      learning-path.tsx
+      topic-workspace.tsx
+      visual-explanation-panel.tsx
+    ui/
+      card.tsx
+      progress-bar.tsx
+  data/
+    flashcards.ts
+    learning-path.ts
+    problems.json
+  lib/
+    problem-utils.ts
+    utils.ts
+  state/
+    game-store.tsx
+  types/
+    dsa.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Data Model
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Problems are stored in `src/data/problems.json` using a production-friendly shape:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```json
+{
+  "id": "binary-search-classic",
+  "topic": "binary-search",
+  "difficulty": "Beginner",
+  "steps": [],
+  "correctOrder": [],
+  "explanation": "...",
+  "languageTemplates": {}
+}
+```
 
-## Learn More
+Includes starter modules:
+- Binary Search
+- Two Pointers
+- Stack Operations
 
-To learn more about Next.js, take a look at the following resources:
+## Run Locally
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Install dependencies:
+```bash
+npm install
+```
+2. Start development server:
+```bash
+npm run dev
+```
+3. Open `http://localhost:3000`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Production
 
-## Deploy on Vercel
+```bash
+npm run lint
+npm run build
+npm run start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Extension Points
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The architecture is modular and ready for:
+- visual algorithm animation components
+- AI-generated explanation providers
+- future code execution or sandbox integration

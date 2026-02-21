@@ -1,0 +1,54 @@
+import { Card } from "@/components/ui/card";
+import { LearningTopic, TopicKey } from "@/types/dsa";
+
+interface LearningPathProps {
+  topics: LearningTopic[];
+  selectedTopic: TopicKey;
+  completedTopics: TopicKey[];
+  onSelectTopic: (topic: TopicKey) => void;
+}
+
+export function LearningPath({
+  topics,
+  selectedTopic,
+  completedTopics,
+  onSelectTopic,
+}: LearningPathProps) {
+  return (
+    <Card className="space-y-3">
+      <h2 className="text-sm font-semibold tracking-wide text-[var(--muted)]">
+        Beginner Path
+      </h2>
+      <div className="space-y-2">
+        {topics
+          .sort((a, b) => a.order - b.order)
+          .map((topic) => {
+            const isActive = topic.id === selectedTopic;
+            const completed = completedTopics.includes(topic.id);
+            return (
+              <button
+                type="button"
+                key={topic.id}
+                onClick={() => onSelectTopic(topic.id)}
+                className={`w-full rounded-lg border p-3 text-left transition ${
+                  isActive
+                    ? "border-[var(--accent)] bg-[#152030]"
+                    : "hover:bg-[#161e2b]"
+                }`}
+              >
+                <p className="text-sm font-medium">{`${topic.order}. ${topic.title}`}</p>
+                <p className="text-xs text-[var(--muted)]">{topic.description}</p>
+                <p className="mt-2 text-xs">
+                  {completed ? (
+                    <span className="text-[var(--success)]">Completed</span>
+                  ) : (
+                    <span className="text-[var(--muted)]">In progress</span>
+                  )}
+                </p>
+              </button>
+            );
+          })}
+      </div>
+    </Card>
+  );
+}

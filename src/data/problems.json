@@ -1,0 +1,295 @@
+[
+  {
+    "id": "arrays-two-sum-two-pointers",
+    "topic": "arrays",
+    "title": "Sorted Two Sum (Array Foundations)",
+    "difficulty": "Beginner",
+    "steps": [
+      "Set left pointer at array start",
+      "Set right pointer at array end",
+      "Compute sum = nums[left] + nums[right]",
+      "If sum is target, return indices",
+      "If sum < target, move left pointer right",
+      "If sum > target, move right pointer left",
+      "Repeat until pointers cross, then return not found"
+    ],
+    "correctOrder": [0, 1, 2, 3, 4, 5, 6],
+    "explanation": "Two pointers work because the array is sorted. Move the pointer that helps the sum get closer to the target.",
+    "timeComplexity": "O(n)",
+    "spaceComplexity": "O(1)",
+    "intuition": "One pointer from each side lets you adjust the sum quickly without checking all pairs.",
+    "languageTemplates": {
+      "python": {
+        "code": "while __0__ < __1__:\\n    total = nums[left] + nums[right]\\n    if total == target:\\n        return [left, right]",
+        "tokens": [
+          {
+            "id": "left-bound",
+            "options": ["left", "right", "target"],
+            "answer": "left",
+            "explanation": "The loop starts from the left side with the left pointer."
+          },
+          {
+            "id": "right-bound",
+            "options": ["left", "right", "len(nums)"],
+            "answer": "right",
+            "explanation": "It must compare left against right to know when pointers cross."
+          }
+        ]
+      },
+      "cpp": {
+        "code": "while (__0__ < __1__) {\\n  int total = nums[left] + nums[right];\\n  if (total == target) return {left, right};\\n}",
+        "tokens": [
+          {
+            "id": "left-bound",
+            "options": ["left", "right", "target"],
+            "answer": "left",
+            "explanation": "Start boundary is left pointer."
+          },
+          {
+            "id": "right-bound",
+            "options": ["left", "right", "nums.size()"],
+            "answer": "right",
+            "explanation": "End boundary is right pointer."
+          }
+        ]
+      },
+      "java": {
+        "code": "while (__0__ < __1__) {\\n    int total = nums[left] + nums[right];\\n    if (total == target) return new int[] {left, right};\\n}",
+        "tokens": [
+          {
+            "id": "left-bound",
+            "options": ["left", "right", "target"],
+            "answer": "left",
+            "explanation": "Left pointer is the lower bound."
+          },
+          {
+            "id": "right-bound",
+            "options": ["left", "right", "nums.length"],
+            "answer": "right",
+            "explanation": "Right pointer is the upper bound."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "two-pointers-container",
+    "topic": "two-pointers",
+    "title": "Container With Most Water",
+    "difficulty": "Beginner",
+    "steps": [
+      "Initialize left pointer at 0",
+      "Initialize right pointer at n - 1",
+      "Compute width = right - left",
+      "Height is min(height[left], height[right])",
+      "Update best area",
+      "Move the pointer with smaller height",
+      "Repeat until left meets right"
+    ],
+    "correctOrder": [0, 1, 2, 3, 4, 5, 6],
+    "explanation": "Moving the shorter side is the only way to possibly increase area, because width always shrinks.",
+    "timeComplexity": "O(n)",
+    "spaceComplexity": "O(1)",
+    "intuition": "You keep the chance of finding a taller wall by discarding the shorter one.",
+    "languageTemplates": {
+      "python": {
+        "code": "while __0__ < __1__:\\n    width = __1__ - __0__\\n    area = min(h[left], h[right]) * width",
+        "tokens": [
+          {
+            "id": "left-check",
+            "options": ["left", "right", "width"],
+            "answer": "left",
+            "explanation": "Loop lower boundary is left."
+          },
+          {
+            "id": "right-check",
+            "options": ["left", "right", "area"],
+            "answer": "right",
+            "explanation": "Loop upper boundary is right."
+          }
+        ]
+      },
+      "cpp": {
+        "code": "while (__0__ < __1__) {\\n  int width = __1__ - __0__;\\n  int area = min(h[left], h[right]) * width;\\n}",
+        "tokens": [
+          {
+            "id": "left-check",
+            "options": ["left", "right", "width"],
+            "answer": "left",
+            "explanation": "Left pointer starts as lower bound."
+          },
+          {
+            "id": "right-check",
+            "options": ["left", "right", "area"],
+            "answer": "right",
+            "explanation": "Right pointer starts as upper bound."
+          }
+        ]
+      },
+      "java": {
+        "code": "while (__0__ < __1__) {\\n    int width = __1__ - __0__;\\n    int area = Math.min(h[left], h[right]) * width;\\n}",
+        "tokens": [
+          {
+            "id": "left-check",
+            "options": ["left", "right", "width"],
+            "answer": "left",
+            "explanation": "Left pointer controls lower index."
+          },
+          {
+            "id": "right-check",
+            "options": ["left", "right", "area"],
+            "answer": "right",
+            "explanation": "Right pointer controls higher index."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "stack-valid-parentheses",
+    "topic": "stack",
+    "title": "Valid Parentheses",
+    "difficulty": "Beginner",
+    "steps": [
+      "Create an empty stack",
+      "Loop through each character",
+      "If opening bracket, push to stack",
+      "If closing bracket, stack must not be empty",
+      "Pop top and verify it matches closing bracket",
+      "If mismatch exists, return false",
+      "At end, return stack is empty"
+    ],
+    "correctOrder": [0, 1, 2, 3, 4, 5, 6],
+    "explanation": "The stack stores the most recent opening bracket, so each closing bracket can be matched in reverse order.",
+    "timeComplexity": "O(n)",
+    "spaceComplexity": "O(n)",
+    "intuition": "Last opening bracket should close first. Stack naturally models that behavior.",
+    "languageTemplates": {
+      "python": {
+        "code": "for ch in s:\\n    if ch in opens:\\n        __0__(ch)\\n    else:\\n        if not stack: return False\\n        top = stack.__1__()",
+        "tokens": [
+          {
+            "id": "push-op",
+            "options": ["stack.append", "stack.pop", "stack.peek"],
+            "answer": "stack.append",
+            "explanation": "Opening brackets are pushed to remember them."
+          },
+          {
+            "id": "pop-op",
+            "options": ["append", "top", "pop"],
+            "answer": "pop",
+            "explanation": "A closing bracket compares with the latest opening bracket."
+          }
+        ]
+      },
+      "cpp": {
+        "code": "for (char ch : s) {\\n  if (opens.count(ch)) {\\n    __0__(ch);\\n  } else {\\n    if (st.empty()) return false;\\n    char top = st.__1__();\\n  }\\n}",
+        "tokens": [
+          {
+            "id": "push-op",
+            "options": ["st.push", "st.pop", "st.top"],
+            "answer": "st.push",
+            "explanation": "Push opening brackets onto stack."
+          },
+          {
+            "id": "top-op",
+            "options": ["push", "top", "empty"],
+            "answer": "top",
+            "explanation": "Read top before removing or comparing."
+          }
+        ]
+      },
+      "java": {
+        "code": "for (char ch : s.toCharArray()) {\\n    if (opens.contains(ch)) {\\n        __0__(ch);\\n    } else {\\n        if (stack.isEmpty()) return false;\\n        char top = stack.__1__();\\n    }\\n}",
+        "tokens": [
+          {
+            "id": "push-op",
+            "options": ["stack.push", "stack.pop", "stack.peek"],
+            "answer": "stack.push",
+            "explanation": "Opening brackets must be stored."
+          },
+          {
+            "id": "peek-op",
+            "options": ["push", "peek", "empty"],
+            "answer": "peek",
+            "explanation": "Peek checks the latest opening bracket."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "binary-search-classic",
+    "topic": "binary-search",
+    "title": "Classic Binary Search",
+    "difficulty": "Beginner",
+    "steps": [
+      "Initialize left pointer to 0",
+      "Initialize right pointer to n - 1",
+      "While left <= right, calculate mid",
+      "Compare nums[mid] with target",
+      "If equal, return mid",
+      "If target is larger, move left to mid + 1",
+      "If target is smaller, move right to mid - 1",
+      "Return -1 if not found"
+    ],
+    "correctOrder": [0, 1, 2, 3, 4, 5, 6, 7],
+    "explanation": "Binary search halves the search space every step, which makes it fast on sorted arrays.",
+    "timeComplexity": "O(log n)",
+    "spaceComplexity": "O(1)",
+    "intuition": "Each comparison tells you which half cannot contain the target.",
+    "languageTemplates": {
+      "python": {
+        "code": "while __0__ <= __1__:\\n    mid = (__0__ + __1__) // 2\\n    if nums[mid] == target: return mid",
+        "tokens": [
+          {
+            "id": "left-loop",
+            "options": ["left", "right", "mid"],
+            "answer": "left",
+            "explanation": "Loop starts from left boundary."
+          },
+          {
+            "id": "right-loop",
+            "options": ["left", "right", "target"],
+            "answer": "right",
+            "explanation": "Loop ends at right boundary."
+          }
+        ]
+      },
+      "cpp": {
+        "code": "while (__0__ <= __1__) {\\n  int mid = (__0__ + __1__) / 2;\\n  if (nums[mid] == target) return mid;\\n}",
+        "tokens": [
+          {
+            "id": "left-loop",
+            "options": ["left", "right", "mid"],
+            "answer": "left",
+            "explanation": "Lower bound variable is left."
+          },
+          {
+            "id": "right-loop",
+            "options": ["left", "right", "target"],
+            "answer": "right",
+            "explanation": "Upper bound variable is right."
+          }
+        ]
+      },
+      "java": {
+        "code": "while (__0__ <= __1__) {\\n    int mid = (__0__ + __1__) / 2;\\n    if (nums[mid] == target) return mid;\\n}",
+        "tokens": [
+          {
+            "id": "left-loop",
+            "options": ["left", "right", "mid"],
+            "answer": "left",
+            "explanation": "Left is the low boundary."
+          },
+          {
+            "id": "right-loop",
+            "options": ["left", "right", "target"],
+            "answer": "right",
+            "explanation": "Right is the high boundary."
+          }
+        ]
+      }
+    }
+  }
+]
