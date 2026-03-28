@@ -16,33 +16,33 @@ export const flashcards: Flashcard[] = [
   },
   {
     id: "f3",
-    topic: "two-pointers",
+    topic: "arrays",
     question: "When should you consider two pointers?",
     answer:
       "Use two pointers when data is ordered or when scanning from both ends can reduce brute-force checks.",
   },
   {
     id: "f4",
-    topic: "stack",
+    topic: "strings",
     question: "What is stack order?",
     answer: "LIFO: Last In, First Out. The latest pushed item is popped first.",
   },
   {
     id: "f5",
-    topic: "stack",
+    topic: "strings",
     question: "Typical stack operations complexity?",
     answer: "Push, pop, and peek are all O(1).",
   },
   {
     id: "f6",
-    topic: "binary-search",
+    topic: "searching",
     question: "Why is binary search O(log n)?",
     answer: "Each step discards half of the remaining search space.",
   },
   {
     id: "f7",
-    topic: "binary-search",
+    topic: "searching",
     question: "Key requirement for binary search?",
-    answer: "The input array must be sorted.",
+    answer: "The search space must be monotonic so you can discard half safely (often a sorted array).",
   },
 ];

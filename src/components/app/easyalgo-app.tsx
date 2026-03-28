@@ -10,23 +10,23 @@ import { learningPath } from "@/data/learning-path";
 import { flashcards } from "@/data/flashcards";
 import { getProblemById } from "@/lib/problem-utils";
 import { GameProvider, useGame } from "@/state/game-store";
-import { TopicKey } from "@/types/dsa";
+import Link from "next/link";
 
 function EasyAlgoInner() {
-  const [selectedTopic, setSelectedTopic] = useState<TopicKey>("arrays");
+  const [selectedId, setSelectedId] = useState(learningPath[0]?.id ?? "");
   const game = useGame();
 
-  const selectedPathItem = learningPath.find((topic) => topic.id === selectedTopic);
+  const selectedPathItem = learningPath.find((topic) => topic.id === selectedId);
   const selectedProblem = selectedPathItem
     ? getProblemById(selectedPathItem.problemId)
     : undefined;
 
-  const selectedCards = useMemo(
-    () => flashcards.filter((card) => card.topic === selectedTopic),
-    [selectedTopic]
-  );
+  const selectedCards = useMemo(() => {
+    if (!selectedProblem) return [];
+    return flashcards.filter((card) => card.topic === selectedProblem.topic);
+  }, [selectedProblem]);
 
-  const completedTopics = useMemo(() => {
+  const completedClassicSteps = useMemo(() => {
     return learningPath
       .filter((topic) =>
         game.completedChallenges.some((challengeId) =>
@@ -36,9 +36,9 @@ function EasyAlgoInner() {
       .map((topic) => topic.id);
   }, [game.completedChallenges]);
 
-  const progressPercent = (completedTopics.length / learningPath.length) * 100;
+  const progressPercent = (completedClassicSteps.length / learningPath.length) * 100;
 
-  if (!selectedProblem) {
+  if (!selectedProblem || !selectedPathItem) {
     return null;
   }
 
@@ -47,13 +47,19 @@ function EasyAlgoInner() {
       <div className="mx-auto grid w-full max-w-7xl gap-4">
         <header className="flex flex-wrap items-end justify-between gap-2">
           <div>
-            <h1 className="text-xl font-semibold">EasyAlgo</h1>
+            <Link
+              href="/dashboard"
+              className="mb-2 inline-block text-xs font-medium text-[var(--accent)] hover:underline"
+            >
+              ← Back to platform
+            </Link>
+            <h1 className="text-xl font-semibold">Classic practice</h1>
             <p className="text-sm text-[var(--muted)]">
-              Duolingo-style DSA learning focused on intuition.
+              Gamified drills: ordering steps, fill-in-the-blank, and flashcards.
             </p>
           </div>
           <span className="rounded-md border px-3 py-1 text-xs text-[var(--muted)]">
-            Topic: {selectedPathItem?.title}
+            Step: {selectedPathItem.title}
           </span>
         </header>
 
@@ -67,9 +73,9 @@ function EasyAlgoInner() {
         <div className="grid gap-4 xl:grid-cols-[280px,1fr]">
           <LearningPath
             topics={learningPath}
-            selectedTopic={selectedTopic}
-            completedTopics={completedTopics}
-            onSelectTopic={setSelectedTopic}
+            selectedId={selectedId}
+            completedIds={completedClassicSteps}
+            onSelect={setSelectedId}
           />
           <TopicWorkspace
             problem={selectedProblem}

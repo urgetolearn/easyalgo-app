@@ -13,9 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "EasyAlgo - Duolingo for DSA",
+  title: {
+    default: "EasyAlgo — DSA learning platform",
+    template: "%s · EasyAlgo",
+  },
   description:
-    "Gamified data structures and algorithms learning with drag and drop, flashcards, and fill-in-the-blank logic challenges.",
+    "Multi-topic DSA curriculum, learning paths, progress tracking, and AI explanations — plus classic gamified drills.",
 };
 
 export default function RootLayout({

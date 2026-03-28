@@ -1,35 +1,35 @@
 import { Card } from "@/components/ui/card";
-import { LearningTopic, TopicKey } from "@/types/dsa";
+import type { LearningTopic } from "@/types/dsa";
 
 interface LearningPathProps {
   topics: LearningTopic[];
-  selectedTopic: TopicKey;
-  completedTopics: TopicKey[];
-  onSelectTopic: (topic: TopicKey) => void;
+  selectedId: string;
+  completedIds: string[];
+  onSelect: (id: string) => void;
 }
 
 export function LearningPath({
   topics,
-  selectedTopic,
-  completedTopics,
-  onSelectTopic,
+  selectedId,
+  completedIds,
+  onSelect,
 }: LearningPathProps) {
   return (
     <Card className="space-y-3">
       <h2 className="text-sm font-semibold tracking-wide text-[var(--muted)]">
-        Beginner Path
+        Classic track
       </h2>
       <div className="space-y-2">
         {topics
           .sort((a, b) => a.order - b.order)
           .map((topic) => {
-            const isActive = topic.id === selectedTopic;
-            const completed = completedTopics.includes(topic.id);
+            const isActive = topic.id === selectedId;
+            const completed = completedIds.includes(topic.id);
             return (
               <button
                 type="button"
                 key={topic.id}
-                onClick={() => onSelectTopic(topic.id)}
+                onClick={() => onSelect(topic.id)}
                 className={`w-full rounded-lg border p-3 text-left transition ${
                   isActive
                     ? "border-[var(--accent)] bg-[#152030]"

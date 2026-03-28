@@ -1,32 +1,33 @@
 import { LearningTopic } from "@/types/dsa";
 
+/** Linear steps for the legacy drag-and-drop / flashcard workspace at `/practice`. */
 export const learningPath: LearningTopic[] = [
   {
-    id: "arrays",
-    title: "Arrays",
+    id: "classic-1",
+    title: "Arrays · Two pointers",
     order: 1,
-    description: "Foundations: indexed storage, traversal, and pair logic.",
+    description: "Sorted pair sum with two moving pointers.",
     problemId: "arrays-two-sum-two-pointers",
   },
   {
-    id: "two-pointers",
-    title: "Two Pointers",
+    id: "classic-2",
+    title: "Arrays · Container",
     order: 2,
-    description: "Learn pointer movement strategy and invariant thinking.",
+    description: "Area maximization from both ends.",
     problemId: "two-pointers-container",
   },
   {
-    id: "stack",
-    title: "Stack",
+    id: "classic-3",
+    title: "Strings · Stack",
     order: 3,
-    description: "Understand LIFO intuition for parsing and validation tasks.",
+    description: "Match brackets with a LIFO structure.",
     problemId: "stack-valid-parentheses",
   },
   {
-    id: "binary-search",
-    title: "Binary Search",
+    id: "classic-4",
+    title: "Searching · Binary search",
     order: 4,
-    description: "Master divide-and-conquer search on sorted structures.",
+    description: "Halve the search space each step.",
     problemId: "binary-search-classic",
   },
 ];
